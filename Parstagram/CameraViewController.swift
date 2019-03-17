@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Parse
+import AlamofireImage
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var commentField: UITextField!
     let sourceDialog = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
 
@@ -37,13 +40,36 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }))
     }
     
-
+    @IBAction func onSubmit(_ sender: Any) {
+        let post = PFObject(className: "Posts")
+        
+        post["caption"] = commentField.text!
+        post["author"] = PFUser.current()
+        post["image"] = PFFileObject(data: imageView.image!.pngData()!)
+        
+        post.saveInBackground{ (success, error) in
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("Error!")
+            }
+        }
+    }
+    
     @IBAction func onCancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onCapture(_ sender: Any) {
         present(sourceDialog, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as! UIImage
+        let size = CGSize(width: 343, height: 343)
+        imageView.image = image.af_imageScaled(to: size)
+        
+        dismiss(animated: true, completion: nil)
     }
     
     /*
