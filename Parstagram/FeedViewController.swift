@@ -16,7 +16,11 @@ class FeedViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func onLogout(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "userLoggedIn")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

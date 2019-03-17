@@ -38,6 +38,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
 
+    @IBAction func onCancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func onCapture(_ sender: Any) {
         present(sourceDialog, animated: true)
     }

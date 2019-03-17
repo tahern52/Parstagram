@@ -113,7 +113,11 @@
                         <viewLayoutGuide key="safeArea" id="6Bp-rA-hs4"/>
                     </view>
                     <navigationItem key="navigationItem" title="Parstagram" id="v09-ju-UT5">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="WC5-um-BBO"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="WC5-um-BBO">
+                            <connections>
+                                <action selector="onLogout:" destination="7mv-9k-3zq" id="oq7-eX-Nz2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="hvk-bo-xMs">
                             <connections>
                                 <segue destination="ZlB-cI-v8S" kind="presentation" id="D9T-8h-I8y"/>
@@ -167,7 +171,11 @@
                         <viewLayoutGuide key="safeArea" id="4YN-S5-Xfu"/>
                     </view>
                     <navigationItem key="navigationItem" title="Capture" id="0Ar-ii-cfC">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="mID-AM-cJA"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="mID-AM-cJA">
+                            <connections>
+                                <action selector="onCancel:" destination="QiQ-vi-MsP" id="W0t-5m-njO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="sAY-97-WBG"/>
                     </navigationItem>
                     <connections>

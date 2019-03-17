@@ -19,6 +19,11 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "userLoggedIn") {
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
+        }
+    }
 
     @IBAction func onSignUp(_ sender: Any) {
         let user = PFUser()
@@ -28,7 +33,10 @@ class LoginViewController: UIViewController {
         
         user.signUpInBackground { (success, error) in
             if success {
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                self.usernameField.text = ""
+                self.passwordField.text = ""
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
             else {
                 print("An error occurred: \(error?.localizedDescription ?? "No error data available")")
@@ -45,7 +53,10 @@ class LoginViewController: UIViewController {
         // Attempt log in
         PFUser.logInWithUsername(inBackground: usernameField.text!, password: passwordField.text!) { (user, error) in
             if user != nil {
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                self.usernameField.text = ""
+                self.passwordField.text = ""
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
             else {
                 self.present(invalidLoginAlert, animated: true)
