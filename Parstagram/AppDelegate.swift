@@ -27,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
+        if PFUser.current() != nil {
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            window?.rootViewController = main.instantiateViewController(withIdentifier: "FeedNavController")
+        }
+        
         return true
     }
 
